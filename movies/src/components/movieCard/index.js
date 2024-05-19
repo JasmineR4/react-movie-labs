@@ -18,15 +18,27 @@ import Avatar from "@mui/material/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
 
 export default function MovieCard({ movie, action }) {
-  const { favorites = [], addToFavorites, playlist = [], addToPlaylist } = useContext(MoviesContext);
 
-  movie.favorite = favorites.includes(movie.id);
-  movie.playlist = playlist.includes(movie.id);
+  const { favorites, addToFavorites } = useContext(MoviesContext);
+  const { playlist, addToPlaylist } = useContext(MoviesContext);
+
+
+  if (favorites.find((id) => id === movie.id)) {
+    movie.favorite = true;
+  } else {
+    movie.favorite = false
+  }
 
   const handleAddToFavorite = (e) => {
     e.preventDefault();
     addToFavorites(movie);
   };
+
+  if (playlist.find((id) => id === movie.id)) {
+    movie.playlist = true;
+  } else {
+    movie.playlist = false
+  }
 
   const handleAddToPlaylist = (e) => {
     e.preventDefault();
@@ -39,7 +51,7 @@ export default function MovieCard({ movie, action }) {
       <CardHeader
         avatar={
           movie.favorite ? (
-            <Avatar sx={{ backgroundColor: 'red' }}>
+            <Avatar sx={{ backgroundColor: 'purple' }}>
               <FavoriteIcon />
             </Avatar>
           ) : null
