@@ -3,7 +3,7 @@ import UpcomingMovies from '../components/upcomingMovies/upcomingMovies.js';
 import PageTemplate from "../components/templateMovieListPage";
 import Spinner from '../components/spinner'; // Assuming you have a Spinner component for loading state
 import { getUpcomingMovies } from '../util'; // Import the data fetching function
-import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import AddToPlaylistIcon from '../components/cardIcons/addToPlaylist'
 
 const UpcomingMoviesPage = () => {
   const [loading, setLoading] = useState(true);
@@ -35,7 +35,7 @@ const UpcomingMoviesPage = () => {
       title="Upcoming Movies"
       movies={movies}
       action={(movie) => {
-        return <AddToFavoritesIcon movie={movie} />
+        return <AddToPlaylistIcon movie={movie} />
       }}
     />
   );
