@@ -55,9 +55,10 @@ export const getMovies = () => {
       if (!response.ok) {
         throw new Error(response.json().message);
       }
+
       return response.json();
-  
     })
+
     .catch((error) => {
       throw error
    });
@@ -67,9 +68,40 @@ export const getMovies = () => {
     return fetch(
       `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
     )
+
       .then((res) => res.json())
       .then((json) => {
         // console.log(json.results);
         return json.results;
       });
   };
+
+export const getMovieCredits = (movieId) => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const getMovieRecc = (movieId) => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};

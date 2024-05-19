@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import UpcomingMovies from '../components/upcomingMovies/upcomingMovies.js';
+import TopMovies from '../components/topMovies';
 import PageTemplate from "../components/templateMovieListPage";
-import Spinner from '../components/spinner'; // Assuming you have a Spinner component for loading state
-import { getUpcomingMovies } from '../util'; // Import the data fetching function
+import Spinner from '../components/spinner'; 
+import { getTopMovies } from '../util';
 import AddToPlaylistIcon from '../components/cardIcons/addToPlaylist'
 
-const UpcomingMoviesPage = () => {
+const TopMoviesPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [movies, setMovies] = useState([]);
@@ -13,7 +13,7 @@ const UpcomingMoviesPage = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const data = await getUpcomingMovies();
+        const data = await getTopMovies();
         setMovies(data);
       } catch (error) {
         setError(error.message);
@@ -31,7 +31,7 @@ const UpcomingMoviesPage = () => {
 
   return (
     <PageTemplate
-      title="Upcoming Movies"
+      title="Top Rated Movies"
       movies={movies}
       action={(movie) => {
         return <AddToPlaylistIcon movie={movie} />
@@ -40,4 +40,4 @@ const UpcomingMoviesPage = () => {
   );
 };
 
-export default UpcomingMoviesPage;
+export default TopMoviesPage;

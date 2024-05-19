@@ -9,6 +9,8 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
+import MovieCard from "../movieCard";
+import Grid from "@mui/material/Grid";
 
 
 const root = {
@@ -21,7 +23,7 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie }) => {  // Don't miss this!
+const MovieDetails = ({ movie, credits, recommendations }) => {  // Don't miss this!
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -47,6 +49,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
           </li>
         ))}
       </Paper>
+
       <Paper component="ul" sx={{...root}}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
@@ -59,6 +62,49 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
+      <Typography variant="h5" component="h4">
+        Credits
+      </Typography>
+      <Typography variant="h6" component="h3">
+        Cast:
+      </Typography>
+      <Paper component="ul" sx={{ ...root }}>
+
+        {credits.cast.map((castMember) => (
+          <li key={castMember.cast_id}>
+            <Chip label={`${castMember.name} as ${castMember.character}`} />
+          </li>
+        ))}
+
+      </Paper>
+      <Typography variant="h6" component="h4">
+        Crew:
+      </Typography>
+      <Paper component="ul" sx={{ ...root }}>
+
+        {credits.crew.map((crewMember) => (
+          <li key={crewMember.credit_id}>
+            <Chip label={`${crewMember.name} - ${crewMember.job}`} />
+          </li>
+        ))}
+        
+      </Paper>
+
+      <Typography variant="h4" component="h3">
+        Recommendations
+      </Typography>
+      <Grid container spacing={2}>
+        {recommendations && recommendations.length > 0 ? (
+          recommendations.map((rec) => (
+            <Grid item key={rec.id} xs={12} sm={6} md={4} lg={3}>
+              <MovieCard movie={rec} action={() => <></>} />
+            </Grid>
+          ))
+        ): 
+        
+        ( <Typography>There are no recommendations available</Typography>)}
+      </Grid>
+
       <Fab
         color="secondary"
         variant="extended"

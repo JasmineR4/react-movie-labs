@@ -23,3 +23,32 @@ export const getUpcomingMovies = async () => {
     return [];
   }
 };
+
+export const getPopularMovies = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error('Error fetching popular movies:', error);
+    return [];
+  }
+};
+
+
+export const getTopMovies = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error('Error fetching Top rated movies:', error);
+    return [];
+  }
+};
