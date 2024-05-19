@@ -13,7 +13,7 @@ import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png';
 import { Link } from "react-router-dom";
-import Avatar from '@mui/material/Avatar';
+import Avatar from "@mui/material/Avatar";
 
 export default function MovieCard(props) {
 
@@ -26,6 +26,7 @@ export default function MovieCard(props) {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
+
       <CardHeader
         avatar={
           movie.favorite ? (
